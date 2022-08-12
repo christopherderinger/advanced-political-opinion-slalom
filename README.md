@@ -25,11 +25,11 @@ docker run --user root -p 8887:8888 -it test-mt
 
 ## Step 2
 
-A Jupyter Hub Server is started and can be accessed using the following link:
+A JupyterLab Server is started and can be accessed using the following link:
 
 ```localhost:8887```
 
-A token will be required to log into the Jupyter Hub. This token can be found in the command line window where the docker commands have been exexuted.
+A token will be required to log into the JupyterLab. This token can be found in the command line window where the docker commands have been exexuted.
 
 The message will look like the following:
 
@@ -43,6 +43,6 @@ The token is found at the end, in this example it would be ```bbb7a73fe4a339c9ee
 
 ## Step 3
 
-The Jupyter Hub should allow the navigation to the ```mt``` folder. It should be listed on the left side, right above the ```work``` folder.
+The JupyterLab should allow the navigation to the ```mt``` folder. It should be listed on the left side, right above the ```work``` folder.
 
 From there it is possible to navigate to the ```mt/code/alliteration_detection``` folder, where the current notebooks can be found.
