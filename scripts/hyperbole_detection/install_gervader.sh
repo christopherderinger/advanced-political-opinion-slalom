@@ -3,7 +3,6 @@
 COMMIT_SHA=edb89a2416b9f49a08735311207f116e381e0b19
 URL="https://github.com/KarstenAMF/GerVADER/archive/${COMMIT_SHA}.zip"
 FILE_PATH=/home/jovyan/mt/code/hyperbole_detection
-ZIP_NAME = ${COMMIT_SHA}.zip
 
 cd $FILE_PATH
 curl -L -O $URL
