@@ -5,6 +5,15 @@ USER root
 ADD ./code /home/jovyan/mt/code
 ADD ./data /home/jovyan/mt/data
 ADD ./scripts /home/jovyan/mt/scripts
+ADD ./plots /home/jovyan/mt/plots
+
+# required for writing files into the folders
+RUN sudo chmod +t /home/jovyan/mt/data
+RUN sudo chmod +t /home/jovyan/mt/plots
+
+RUN sudo find data/ -type d -exec chmod +t {} \;
+
+RUN sudo find plots/ -type d -exec chmod +t {} \;
 
 RUN apt-get update && apt-get install -y vim
 
