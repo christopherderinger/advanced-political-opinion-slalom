@@ -11,7 +11,7 @@ class ProtocolParser:
         if self._is_path_valid(path):
                 with open(path) as f:
                     self.soup = BeautifulSoup(f,'html.parser')
-                    self.soup = BeautifulSoup(self.soup.prettify())
+                    self.soup = BeautifulSoup(self.soup.prettify(),features="lxml")
         else:
             print("Please provide a path to a valid html")
     
@@ -122,8 +122,8 @@ class ProtocolParser:
 
         # a few more replacements of patterns that show up frequently
         text_clean = text_clean.replace("\xa0"," ").replace("\xad","").replace("\n"," ").replace("–","")
-
-        text_clean = self._clean_text_with_certain_options(text_clean)
+        if text_clean and len(text_clean) > 0:
+            text_clean = self._clean_text_with_certain_options(text_clean)
 
         return text_clean
     
@@ -163,7 +163,13 @@ class ProtocolParser:
         except:
             print("pattern 1 did not work")
 
-        return speech.find_all("p",{"class": "StandardRB"})[0].find("a").get_text()
+        try:
+            return speech.find_all("p",{"class": "StandardRB"})[0].find("a").get_text()
+        except:
+            print("pattern 2 did not work")
+           
+        return speech.find_all("p",{"class": "MsoNormal"})[0].find("a").get_text()     
+
     
     def _get_contents(self, speech):
         # remove the first and last paragraph as they always contain numbers
