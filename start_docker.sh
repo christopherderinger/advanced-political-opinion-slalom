@@ -1,4 +1,4 @@
-$PATH_TO_BIG_DATASETS_FOLDER=/Users/christopher/Development/mt_final_structure/big_datasets
+PATH_TO_BIG_DATASETS_FOLDER=$(pwd)/big_datasets
 
 # the following two lines can be commented in if docker should delete the created containers automatically 
 #docker rm $(docker ps -a --filter ancestor=test-mt -q)
