@@ -4,8 +4,16 @@ USER root
 
 ADD ./code /home/jovyan/mt/code
 ADD ./data /home/jovyan/mt/data
-ADD ./scripts /home/jovyan/mt/scripts
-ADD ./plots /home/jovyan/mt/plots
+
+# empty folders could not be commited to git
+RUN sudo mkdir /home/jovyan/mt/plots
+RUN sudo mkdir /home/jovyan/mt/plots/research_question_1
+RUN sudo mkdir /home/jovyan/mt/plots/research_question_1/climate
+RUN sudo mkdir /home/jovyan/mt/plots/research_question_1/feminism
+RUN sudo mkdir /home/jovyan/mt/plots/research_question_1/asyl
+RUN sudo mkdir /home/jovyan/mt/plots/research_question_2
+RUN sudo mkdir /home/jovyan/mt/plots/research_question_3
+RUN sudo mkdir /home/jovyan/mt/plots/research_question_4
 
 # required for writing files into the folders
 RUN sudo find /home/jovyan/mt/data/ -type d -exec chmod 777 {} \;
@@ -26,4 +34,4 @@ RUN sudo chmod a+w /home/jovyan/mt/code/research_question_4/GerVADER/outputmap.t
 # GerVADER only seems to work inside the container if the path is absolute, therefore the path to outputmap.txt is replaced inside the code of the GerVADER library
 RUN sudo vim -c "%s/outputmap.txt/\/home\/jovyan\/mt\/code\/research_question_4\/GerVADER\/outputmap.txt/g | wq" /home/jovyan/mt/code/research_question_4/GerVADER/vaderSentimentGER.py
 
-RUN pip install pandas textblob-de numpy scikit-learn transformers cleantext wordcloud matplotlib pandarallel num2words cologne_phonetics
+RUN pip install pandas textblob-de numpy scikit-learn transformers cleantext wordcloud matplotlib pandarallel num2words cologne_phonetics lxml
