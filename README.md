@@ -1,4 +1,6 @@
-This document aims to be the readme file of this masterthesis. 
+# Political Opinion Analysis and Figure of Speech detection
+
+This document aims to be the readme file of this masterthesis. It contains a section on the general folder structure, the setup which can be performed to run everything in a Docker container, a small description of all the notebooks and their purpose and a section that contains the citations.
 
 ## Folder structure
 
@@ -23,7 +25,24 @@ The **plots** subfolder only has four subfolders, one per research question:
 \\research_question_3
 \\research_question_4
 
-The protocol_obtainment folders contain everything that is related to the protocol parser, the download of the protocols, the data itself once the download is completed and the procedure that is used to parse all the protocols.
+The protocol_obtainment folders contain everything that is related to the protocol parser, the download of the protocols, the data itself once the download is completed and the procedure that is used to parse all the protocols. The **plots** folder and all the subfolders are created while the docker container is created, as it is not possible to save empty folders in github.
+
+## Setup
+
+On Unix-based systems only Docker is required, on Windows machines Git Bash should be installed as well so that Bash can be used.
+
+As there are a lot of big datasets a separate folder was created containing all of these datasets. The urls to the datasets are contained in the notebooks. All of the datasets should be stored in a folder called **big_datasets**, this folder is then used as a volume for Docker, so that the files are not included in the container itself. There are also some additional files that were too big for github, they belong into the **data** folder and can be gathered by contacting me.
+
+The **start_docker.sh** file contains the scripts that are executed for creating a container based on the image and for running the docker container with the mounted volume. There is a variable called **PATH_TO_BIG_DATASETS_FOLDER**, normally it should be possible to leave it as is, but if there are problems with mounting the **big_datasets** folder, or if it is located in another location, this variable needs to be adjusted.
+
+If Docker is activated and configured in a way so that it can be used in the command line, the Docker container can be created and executed by calling the **start_docker.sh** script like the following:
+
+```
+bash start_docker.sh
+```
+
+This will create a Jupyter Lab environment which is hosted on localhost:8887, it contains all the notebooks and datasets.
+
 ## Programs
 
 ### Protocol Obtainment
@@ -51,7 +70,7 @@ The code for the first research question is located in the **code\\research_ques
 In addition there are two tiny packages:
 
 * \\inverted_index
-* \wikipedia_wordclouds
+* \\wikipedia_wordclouds
 
 The first one of the two tiny packages implements the logic for the inverted index, which is used to store the political statements. The second one implements the logic which is used to retrieve the article from Wikipedia using the Wikipedia API.
 
@@ -106,7 +125,7 @@ The **evaluation_rq2.ipynb** notebook contains the code that was used to generat
 
 ## Research Question 3
 
-The code for the second research question is located in the **code\\research_question_3** folder. There are two notebooks:
+The code for the third research question is located in the **code\\research_question_3** folder. There are two notebooks:
 
 * experiments_rq3.ipynb
 * evaluation_rq3.ipynb
@@ -116,6 +135,24 @@ The **experiments_rq3.ipynb** notebook contains the algorithm that was implement
 The **evaluation_rq3.ipynb** notebook contains the code that was used for creating the plots for the data analysis of the results of the third research question.
 
 The alliteration dataset, which was downloaded from Ulrich Mehners website [6] in January 2023 is contained in the **data\\research_question_3\\thesis** folder, as well as the manually annotated samples.
+
+## Research Question 4
+
+The code for the fourth research question is located in the **code\\research_question_4** folder. There are four notebooks:
+
+* hyperbole_detection.ipynb
+* hyperbole_feature_engineering.ipynb
+* hyperbole_experiment_political.ipynb
+* evaluation_rq4.ipynb
+
+The **hyperbole_feature_engineering.ipynb** notebook contains the code that was used to compute the semantic features that were used by Troiano et al. [7], they are imageability, subjectivity, polarity, unexpectedness and emotional intensity. The notebook requires two additional downloads, which are directly started when executing the notebook. The first one is the PyTorch package, which is downloaded and installed in the first block. This package is included here as it led to problems if it was installed during the creation of the docker container. The second download is the mdebertav3-subjectivity-german model from huggingface.co, which is used to compute the subjectivity.
+
+The **hyperbole_detection.ipynb** notebook contains the experiments that were conducted on the three different datasets (400 manually translated hyperboles, 400 machine translated hyperboles, all machine translated hyperboles) - The hyperboles were taken from the English HYPO-L dataset by Zhang et al. [8] and translated using Google Translate or manually. The datasets can be found in the **data\\research_question_4\\thesis** folder.
+
+The **hyperbole_experiment_political.ipynb** notebook contains the experiment that was conducted on statements from a single protocol of the Austrian national council. The statements which were classified as being hyperbolic where then manually evaluated.
+
+The **evaluation_rq4.ipynb** notebook contains the code that was used to generate the plots for the evaluation of the fourth research question.
+
 ## Citation
 
 [1] Helmut Schmid and Florian Laws: Estimation of Conditional Probabilities with Decision Trees and an Application to Fine-Grained POS Tagging, _COLING 2008_, Manchester, Great Britain.
@@ -130,6 +167,8 @@ The alliteration dataset, which was downloaded from Ulrich Mehners website [6] i
 
 [6]  https://www.mehner.info/html/alliteration.html
 
+[7] Troiano, Enrica, et al. "A computational exploration of exaggeration." Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing. 2018.
 
+[8] Zhang, Yunxiang, and Xiaojun Wan. "MOVER: Mask, over-generate and rank for hyperbole generation." arXiv preprint arXiv:2109.07726 (2021).
 
 
