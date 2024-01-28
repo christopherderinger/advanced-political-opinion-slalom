@@ -6,24 +6,24 @@ This document aims to be the readme file of this masterthesis. It contains a sec
 
 There are three important folders that are reachable from the main directory:
 
-\\code
-\\data
-\\plots
+* \\code
+* \\data
+* \\plots
 
 The **code** folder and the **data** folder have five subfolders each:
 
-\\protocol_obtainment
-\\research_question_1
-\\research_question_2
-\\research_question_3
-\\research_question_4
+* \\protocol_obtainment
+* \\research_question_1
+* \\research_question_2
+* \\research_question_3
+* \\research_question_4
 
 The **plots** subfolder only has four subfolders, one per research question:
 
-\\research_question_1
-\\research_question_2
-\\research_question_3
-\\research_question_4
+* \\research_question_1
+* \\research_question_2
+* \\research_question_3
+* \\research_question_4
 
 The protocol_obtainment folders contain everything that is related to the protocol parser, the download of the protocols, the data itself once the download is completed and the procedure that is used to parse all the protocols. The **plots** folder and all the subfolders are created while the docker container is created, as it is not possible to save empty folders in github.
 
